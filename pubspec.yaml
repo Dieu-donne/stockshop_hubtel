@@ -4,7 +4,8 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: ^3.9.2
+  #sdk: '>=3.1.0 <4.0.0'
   #flutter: ">=1.17.0"
 
 dependencies:
@@ -30,10 +31,14 @@ dependencies:
     #git:
       #url: https://github.com/mohammadhprp/flutter_html_to_pdf2
   socket_io_client: ^3.0.1
+  pinput: ^6.0.1
+  smart_auth: ^3.2.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  
 
 
 flutter:
