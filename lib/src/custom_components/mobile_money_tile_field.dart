@@ -8,18 +8,19 @@ import '../utils/utils.dart';
 import '../ux/wallet/add_wallet_screen.dart';
 
 class MobileMoneyTileField extends StatefulWidget {
-  MobileMoneyTileField(
-      {Key? key,
-      required this.fieldController,
-      this.wallets,
-      this.providers,
-      required this.onWalletSelected,
-      required this.onProviderSelected,
-      required this.hintText,
-      this.onWalletUpdateComplete,
-      this.showWalletAdditionTile,
-      this.isReadOnly = true})
-      : super(key: key);
+  MobileMoneyTileField({
+    Key? key,
+    required this.fieldController,
+    this.wallets,
+    this.providers,
+    required this.onWalletSelected,
+    required this.onProviderSelected,
+    required this.hintText,
+    this.onWalletUpdateComplete,
+    this.showWalletAdditionTile,
+    this.keyboardType,
+    this.isReadOnly = true,
+  }) : super(key: key);
 
   final TextEditingController fieldController;
   final List<Wallet>? wallets;
@@ -29,6 +30,7 @@ class MobileMoneyTileField extends StatefulWidget {
   final void Function(MomoProvider) onProviderSelected;
   VoidCallback? onWalletUpdateComplete;
   bool? showWalletAdditionTile = true;
+  final TextInputType? keyboardType;
   bool isReadOnly = true;
 
   @override
@@ -47,10 +49,12 @@ class _MobileMoneyTileFieldState extends State<MobileMoneyTileField> {
           hintText: widget.hintText,
           controller: widget.fieldController,
           readOnly: widget.isReadOnly,
+          inputType: widget.keyboardType,
           suffixWidget: widget.isReadOnly
               ? Padding(
-                  padding:
-                      const EdgeInsets.only(right: Dimens.paddingDefaultSmall),
+                  padding: const EdgeInsets.only(
+                    right: Dimens.paddingDefaultSmall,
+                  ),
                   child: Icon(
                     expandOptions == true
                         ? FlutterRemix.arrow_up_s_line
@@ -79,13 +83,9 @@ class _MobileMoneyTileFieldState extends State<MobileMoneyTileField> {
           child: Card(
             elevation: 7,
             shadowColor: HubtelColors.neutral.shade300,
-            margin: onlySidePad(
-              top: Dimens.paddingMicro,
-            ),
+            margin: onlySidePad(top: Dimens.paddingMicro),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                Dimens.defaultBorderRadius,
-              ),
+              borderRadius: BorderRadius.circular(Dimens.defaultBorderRadius),
             ),
             child: SizedBox(
               width: double.maxFinite,
@@ -104,8 +104,8 @@ class _MobileMoneyTileFieldState extends State<MobileMoneyTileField> {
                               setState(() {
                                 widget.fieldController.text =
                                     widget.showWalletAdditionTile ?? true
-                                        ? e.accountNo ?? ""
-                                        : e.accountName ?? "";
+                                    ? e.accountNo ?? ""
+                                    : e.accountName ?? "";
                               });
                               expandOptions = false;
                               widget.onWalletSelected(e);
@@ -114,8 +114,9 @@ class _MobileMoneyTileFieldState extends State<MobileMoneyTileField> {
                               widget.showWalletAdditionTile ?? true
                                   ? e.accountNo ?? ""
                                   : e.accountName ?? "",
-                              style: AppTextStyle.body2()
-                                  .copyWith(color: Colors.black),
+                              style: AppTextStyle.body2().copyWith(
+                                color: Colors.black,
+                              ),
                             ),
                             subtitle: widget.showWalletAdditionTile ?? true
                                 ? Visibility(
@@ -126,7 +127,8 @@ class _MobileMoneyTileFieldState extends State<MobileMoneyTileField> {
                                           ? (e.providerName).capitalize()
                                           : "",
                                       style: AppTextStyle.body2().copyWith(
-                                          color: HubtelColors.neutral.shade600),
+                                        color: HubtelColors.neutral.shade600,
+                                      ),
                                     ),
                                   )
                                 : null,
@@ -149,52 +151,52 @@ class _MobileMoneyTileFieldState extends State<MobileMoneyTileField> {
                             title: Text(
                               CheckoutStrings.addMobileMoneyWallet,
                               style: AppTextStyle.body2().copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
                             minLeadingWidth: Dimens.paddingNano,
                           ),
-                        )
+                        ),
                       ]
                     : widget.providers != null
-                        ? widget.providers!
-                            .map(
-                              (e) => ListTile(
-                                onTap: () {
-                                  setState(() {
-                                    widget.fieldController.text = e.name ?? "";
-                                  });
-                                  expandOptions = false;
-                                  widget.onProviderSelected(e);
-                                },
-                                title: Text(
-                                  e.name ?? "",
-                                  style: AppTextStyle.body2()
-                                      .copyWith(color: Colors.black),
+                    ? widget.providers!
+                          .map(
+                            (e) => ListTile(
+                              onTap: () {
+                                setState(() {
+                                  widget.fieldController.text = e.name ?? "";
+                                });
+                                expandOptions = false;
+                                widget.onProviderSelected(e);
+                              },
+                              title: Text(
+                                e.name ?? "",
+                                style: AppTextStyle.body2().copyWith(
+                                  color: Colors.black,
                                 ),
-                                dense: true,
-                                minVerticalPadding: 0,
                               ),
-                            )
-                            .toList()
-                        : [],
+                              dense: true,
+                              minVerticalPadding: 0,
+                            ),
+                          )
+                          .toList()
+                    : [],
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
-  _onWalletAdditionCompleted() async{
+  _onWalletAdditionCompleted() async {
     final onWalletAdded = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => AddWalletScreen(),
-      ),
+      MaterialPageRoute(builder: (context) => AddWalletScreen()),
     );
 
-    if (onWalletAdded == true){
+    if (onWalletAdded == true) {
       widget.onWalletUpdateComplete?.call();
     }
   }

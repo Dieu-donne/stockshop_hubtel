@@ -134,6 +134,7 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
               wallets: widget.wallets,
               hintText: CheckoutStrings.mobileNumber,
               isReadOnly: widget.disableUserNumberInputInteraction,
+              keyboardType: TextInputType.phone,
               onWalletUpdateComplete: () {
                 widget.walletAdditionComplete?.call();
               },
