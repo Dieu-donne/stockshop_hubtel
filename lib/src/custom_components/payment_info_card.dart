@@ -12,13 +12,13 @@ class PaymentInfoCard extends StatelessWidget {
   final double? checkoutFees;
   final double? totalAmountPayable;
 
-  PaymentInfoCard(
-      {Key? key,
-      required this.checkoutPurchase,
-      required this.businessInfo,
-      this.checkoutFees,
-      this.totalAmountPayable})
-      : super(key: key);
+  PaymentInfoCard({
+    Key? key,
+    required this.checkoutPurchase,
+    required this.businessInfo,
+    this.checkoutFees,
+    this.totalAmountPayable,
+  }) : super(key: key);
 
   // final CheckoutPurchase checkoutPurchase;
   // final List<CheckoutFee> checkoutFees;
@@ -40,10 +40,7 @@ class PaymentInfoCard extends StatelessWidget {
           RotatedBox(
             quarterTurns: 2,
             child: ClipPath(
-              clipper: ZigzagClipper(
-                lineCount: 34,
-                lineHeight: 5,
-              ),
+              clipper: ZigzagClipper(lineCount: 34, lineHeight: 5),
               child: Container(
                 height: 30,
                 width: double.maxFinite,
@@ -51,9 +48,7 @@ class PaymentInfoCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: HubtelColors.neutral.shade100,
                   border: Border.symmetric(
-                    vertical: BorderSide(
-                      color: HubtelColors.neutral.shade400,
-                    ),
+                    vertical: BorderSide(color: HubtelColors.neutral.shade400),
                   ),
                 ),
               ),
@@ -76,9 +71,7 @@ class PaymentInfoCard extends StatelessWidget {
             child: Column(
               children: [
                 //
-                const SizedBox(
-                  height: Dimens.paddingNano,
-                ),
+                const SizedBox(height: Dimens.paddingNano),
 
                 Row(
                   // business info
@@ -87,25 +80,24 @@ class PaymentInfoCard extends StatelessWidget {
                   children: [
                     AppImageWidget(
                       //logo
-                      imageUrl: businessInfo.businessImageUrl,
+                      imageUrl:
+                          "https://r2.stockshop.com.gh/assets/logos/logo-asset-e.png",
+                      //imageUrl: businessInfo.businessImageUrl,
                       errorImage: AssetImage(businessInfo.businessImageUrl),
-                      placeHolder: AssetImage(
-                        businessInfo.businessImageUrl,
-                      ),
+                      placeHolder: AssetImage(businessInfo.businessImageUrl),
                       borderRadius: Dimens.normalCircleAvatarRadius,
                       height: 48,
                       width: 48,
                     ),
-                    const SizedBox(
-                      width: Dimens.normalSpacing,
-                    ),
+                    const SizedBox(width: Dimens.normalSpacing),
                     Flexible(
                       child: Column(
                         //name
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            businessInfo.businessName,
+                            //businessInfo.businessName,
+                            'RIDL PAY (Stockshop)',
                             style: AppTextStyle.body2().copyWith(
                               color: HubtelColors.neutral.shade900,
                             ),
@@ -113,9 +105,7 @@ class PaymentInfoCard extends StatelessWidget {
                             maxLines: 1,
                           ),
                           //
-                          const SizedBox(
-                            height: Dimens.paddingMicro,
-                          ),
+                          const SizedBox(height: Dimens.paddingMicro),
                         ],
                       ),
                     ),
@@ -123,9 +113,7 @@ class PaymentInfoCard extends StatelessWidget {
                 ),
 
                 //
-                const SizedBox(
-                  height: Dimens.paddingNano,
-                ),
+                const SizedBox(height: Dimens.paddingNano),
 
                 //
                 Divider(
@@ -135,28 +123,22 @@ class PaymentInfoCard extends StatelessWidget {
                 ),
 
                 //
-                const SizedBox(
-                  height: Dimens.paddingDefault,
-                ),
+                const SizedBox(height: Dimens.paddingDefault),
 
                 PaymentCardHorizontalInfo(
                   detail: CheckoutStrings.amount,
                   value: checkoutPurchase.amount,
                 ),
 
-                const SizedBox(
-                  height: Dimens.paddingNano,
-                ),
+                const SizedBox(height: Dimens.paddingNano),
 
                 ValueListenableBuilder(
                   valueListenable: state.isLessDetails,
                   builder: (ctx, boolean, child) {
-
-                      return PaymentCardHorizontalInfo(
-                        detail: CheckoutStrings.fees,
-                        value: checkoutFees,
-                      );
-
+                    return PaymentCardHorizontalInfo(
+                      detail: CheckoutStrings.fees,
+                      value: checkoutFees,
+                    );
                   },
                 ),
 
@@ -183,10 +165,7 @@ class PaymentInfoCard extends StatelessWidget {
           ),
 
           ClipPath(
-            clipper: ZigzagClipper(
-              lineCount: 34,
-              lineHeight: 10,
-            ),
+            clipper: ZigzagClipper(lineCount: 34, lineHeight: 10),
             child: Container(
               width: double.maxFinite,
               alignment: Alignment.center,
@@ -207,8 +186,8 @@ class PaymentInfoCard extends StatelessWidget {
                   Text(
                     CheckoutStrings.youWillBeCharged,
                     style: AppTextStyle.caption().copyWith(
-                        // color: Theme.of(context).primaryColor.withOpacity(1),
-                        ),
+                      // color: Theme.of(context).primaryColor.withOpacity(1),
+                    ),
                   ),
 
                   const SizedBox(height: Dimens.paddingNano),
