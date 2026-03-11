@@ -16,20 +16,21 @@ import 'mobile_money_tile_field.dart';
 class MobileMoneyExpansionTile extends StatefulWidget {
   static bool fetchFees = true;
 
-  MobileMoneyExpansionTile(
-      {super.key,
-      required this.wallets,
-      required this.providers,
-      required this.mobileNumberController,
-      required this.providerController,
-      required this.onWalletSelected,
-      required this.onProviderSelected,
-      required this.controller,
-      required this.onExpansionChanged,
-      required this.isSelected,
-      required this.selectedProviderMessage,
-      this.walletAdditionComplete,
-      required this.disableUserNumberInputInteraction});
+  MobileMoneyExpansionTile({
+    super.key,
+    required this.wallets,
+    required this.providers,
+    required this.mobileNumberController,
+    required this.providerController,
+    required this.onWalletSelected,
+    required this.onProviderSelected,
+    required this.controller,
+    required this.onExpansionChanged,
+    required this.isSelected,
+    required this.selectedProviderMessage,
+    this.walletAdditionComplete,
+    required this.disableUserNumberInputInteraction,
+  });
 
   final List<Wallet> wallets;
   final List<MomoProvider> providers;
@@ -67,10 +68,7 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
               ? ThemeConfig.themeColor.withOpacity(0.3)
               : Colors.transparent,
           onExpansionChanged: widget.onExpansionChanged,
-          title: Text(
-            CheckoutStrings.mobileMoney,
-            style: AppTextStyle.body2(),
-          ),
+          title: Text(CheckoutStrings.mobileMoney, style: AppTextStyle.body2()),
           expandedAlignment: Alignment.topLeft,
           childrenPadding: const EdgeInsets.symmetric(
             horizontal: Dimens.paddingDefault,
@@ -80,8 +78,10 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Visibility(
-                visible: CheckoutViewModel.channelFetch?.channels
-                        ?.contains("mtn-gh") ??
+                visible:
+                    CheckoutViewModel.channelFetch?.channels?.contains(
+                      "mtn-gh",
+                    ) ??
                     false,
                 child: AppImageWidget.local(
                   image: const AssetImage(CheckoutDrawables.mtnMomoLogo),
@@ -93,11 +93,13 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
               ),
               const SizedBox(width: Dimens.paddingDefaultSmall),
               Visibility(
-                visible: CheckoutViewModel.channelFetch?.channels
-                        ?.contains("vodafone-gh") ??
+                visible:
+                    CheckoutViewModel.channelFetch?.channels?.contains(
+                      "vodafone-gh",
+                    ) ??
                     false,
                 child: AppImageWidget.local(
-                  image:  const AssetImage(CheckoutDrawables.telecelImage),
+                  image: const AssetImage(CheckoutDrawables.telecelImage),
                   width: Dimens.iconSmall,
                   height: Dimens.iconSmall,
                   boxFit: BoxFit.contain,
@@ -106,8 +108,10 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
               ),
               const SizedBox(width: Dimens.paddingDefaultSmall),
               Visibility(
-                visible: CheckoutViewModel.channelFetch?.channels
-                        ?.contains("tigo-gh") ??
+                visible:
+                    CheckoutViewModel.channelFetch?.channels?.contains(
+                      "tigo-gh",
+                    ) ??
                     false,
                 child: AppImageWidget.local(
                   image: const AssetImage(CheckoutDrawables.airtelTigoLogo),
@@ -119,9 +123,7 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
               ),
             ],
           ),
-          leading: CustomRadioIndicator(
-            isSelected: widget.isSelected,
-          ),
+          leading: CustomRadioIndicator(isSelected: widget.isSelected),
           leadingWidth: Dimens.iconMedium,
           titleAlignment: ListTileTitleAlignment.center,
           children: [
@@ -142,7 +144,7 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
               onWalletSelected: widget.onWalletSelected,
               onProviderSelected: widget.onProviderSelected,
               providers: widget.providers,
-              hintText: CheckoutStrings.mobileNetwork,
+              hintText: 'Select Network',
             ),
             const SizedBox(height: Dimens.paddingDefault),
             widget.selectedProviderMessage,
