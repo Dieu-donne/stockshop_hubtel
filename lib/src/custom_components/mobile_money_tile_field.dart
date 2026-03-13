@@ -47,6 +47,9 @@ class _MobileMoneyTileFieldState extends State<MobileMoneyTileField> {
         InputField(
           hasFill: true,
           hintText: widget.hintText,
+          hintStyle: AppTextStyle.body2().copyWith(
+            color: Colors.black,
+          ),
           controller: widget.fieldController,
           readOnly: widget.isReadOnly,
           inputType: widget.keyboardType,

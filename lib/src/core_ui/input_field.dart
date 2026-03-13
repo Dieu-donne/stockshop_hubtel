@@ -29,9 +29,11 @@ class InputField extends StatefulWidget {
       this.focusedBorder,
       this.focusBorderColor,
       this.node,
+      this.hintStyle,
       this.isPassword = false});
 
   final String hintText;
+  final TextStyle? hintStyle;
   final TextEditingController? controller;
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
@@ -82,6 +84,7 @@ class _InputFieldState extends State<InputField> {
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
         hintText: widget.hintText,
+        hintStyle: widget.hintStyle,
         filled: true,
         fillColor: widget.hasFill
             ? HubtelColors.neutral.shade400
