@@ -128,6 +128,14 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
           titleAlignment: ListTileTitleAlignment.center,
           children: [
             MobileMoneyTileField(
+              fieldController: widget.providerController,
+              onWalletSelected: widget.onWalletSelected,
+              onProviderSelected: widget.onProviderSelected,
+              providers: widget.providers,
+              hintText: 'Select Network',
+            ),
+            const SizedBox(height: Dimens.paddingDefault),
+            MobileMoneyTileField(
               fieldController: widget.mobileNumberController,
               onWalletSelected: widget.onWalletSelected,
               onProviderSelected: widget.onProviderSelected,
@@ -138,14 +146,6 @@ class _MobileMoneyExpansionTileState extends State<MobileMoneyExpansionTile> {
               onWalletUpdateComplete: () {
                 widget.walletAdditionComplete?.call();
               },
-            ),
-            const SizedBox(height: Dimens.paddingDefault),
-            MobileMoneyTileField(
-              fieldController: widget.providerController,
-              onWalletSelected: widget.onWalletSelected,
-              onProviderSelected: widget.onProviderSelected,
-              providers: widget.providers,
-              hintText: 'Select Network',
             ),
             const SizedBox(height: Dimens.paddingDefault),
             widget.selectedProviderMessage,
